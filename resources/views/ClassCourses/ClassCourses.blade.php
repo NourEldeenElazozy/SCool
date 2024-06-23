@@ -55,7 +55,7 @@
                                             <th class="border-bottom-0">قيمة الاشتراك</th>
                                             <th class="border-bottom-0">العمليات</th>
 
-                                        </tr>
+                                        </tr> 
                                         </thead>
                                         <tbody>
                                         <?php $i =0?>
