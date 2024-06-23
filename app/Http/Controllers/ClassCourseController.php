@@ -84,32 +84,21 @@ class ClassCourseController extends Controller
      */
     public function update(Request $request, ClassCourse $classCourse)
     {
-        $id = $request->id;
-        $this->validate($request, [
-            
-            'name' => 'required|unique:class_courses,name,'.$id,
-            'trainer_id' => 'required',
-            'course_id' => 'required',
-            'price' => 'required',
-        ],[
+        
+        $trainerid = trainers::where('id', $request->trainer_id)->first()->id;
+        $coourseid = courses::where('id', $request->course_id)->first()->id;
 
-            'name.required' =>'يرجي ادخال الاسم ',
-            'trainer_id.required' =>'يرجي اختيار المعلم ',
-            'course_id.required' =>'يرجي اختيار المادة ',
-            'price.required'=> 'يرجي ادخال قيمة الاشتراك',
-        ]);
 
-        $sections = ClassCourse::find($id);
-        $sections->update([
-            'name' => $request->name,
-            'trainer_id' => $request->trainer_id,
-            'course_id' => $request->course_id,
-            'price' => $request->price,
-            
-        ]);
+       $ClassCourses = ClassCourse::findOrFail($request->pro_id);
 
-        session()->flash('edit','تم التعديل بنجاج');
-        return redirect('/ClassCourses');
+       $ClassCourses->update([
+       'Product_name' => $request->Product_name,
+       'description' => $request->description,
+       'section_id' => $id,
+       ]);
+
+       session()->flash('Edit', 'تم تعديل المنتج بنجاح');
+       return back();
     }
 
     /**

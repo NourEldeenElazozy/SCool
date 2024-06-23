@@ -45,7 +45,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example1" class="table key-buttons text-md-nowrap" data-ptrainer_id-length='50'>
+                                <table id="example1" class="table key-buttons text-md-nowrap" data-ptrainer_id-length="50">
+                                <table id="example1" class="table key-buttons text-md-nowrap" data-ptrainer_id-length='50'>
                                         <thead>
                                         <tr>
                                             <th class="border-bottom-0">#</th>
@@ -64,12 +65,14 @@
                                         <tr>
                                             <td>{{$i}}</td>
                                             <td>{{$x->name}}</td>
-                                            <td>{{$x->course_id }}</td>
-                                            <td>{{$x->trainer_id }}</td>
+                                            <td>{{$x->course->coursename }}</td>
+                                            <td>{{$x->trainer->namefirst }}</td>
                                             <td>{{$x->price}}</td>
                                             <td>
 
                                                     <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+                                                       data-name="{{ $x->coursename }}" data-coursename="{{ $x->id }}"
+                                                       data-name="{{ $x->namefirst }}" data-namefirst="{{ $x->id }}"
                                                        data-id="{{ $x->id }}" data-name="{{ $x->name }}"
                                                        data-coursedescription="{{ $x->coursedescription }}"
                                                        data-price="{{ $x->price }}" 
@@ -159,6 +162,7 @@
                                             <div class="form-group">
                                                 <input type="hidden" name="id" id="id" value="">
                                                 <label for="recipient-name" class="col-form-label">اسم الكورس:</label>
+                                                <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
                                                 <input class="form-control" name="name" id="name" type="text">
                                             </div>
                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">المادة</label>

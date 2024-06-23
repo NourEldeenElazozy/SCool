@@ -13,4 +13,12 @@ class ClassCourse extends Model
         'price',
         'created_by',
     ];
+    public function trainer ()
+    {
+        return $this->belongsTo('App\trainers');
+    }
+    public function course ()
+    {
+        return $this->belongsTo('App\courses');
+    }
 }
