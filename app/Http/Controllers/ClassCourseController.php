@@ -89,12 +89,14 @@ class ClassCourseController extends Controller
         $coourseid = courses::where('id', $request->course_id)->first()->id;
 
 
-       $ClassCourses = ClassCourse::findOrFail($request->pro_id);
+       $ClassCourses = ClassCourse::findOrFail($request->id);
 
        $ClassCourses->update([
-       'Product_name' => $request->Product_name,
-       'description' => $request->description,
-       'section_id' => $id,
+       'name' => $request->name,
+       'course_id' => $coourseid,
+       'trainer_id' => $trainerid,
+       'price' => $request->price,
+       
        ]);
 
        session()->flash('Edit', 'تم تعديل المنتج بنجاح');

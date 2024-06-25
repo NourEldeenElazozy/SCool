@@ -71,19 +71,20 @@
                                             <td>
 
                                                     <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                                       data-name="{{ $x->coursename }}" data-coursename="{{ $x->id }}"
-                                                       data-name="{{ $x->namefirst }}" data-namefirst="{{ $x->id }}"
-                                                       data-id="{{ $x->id }}" data-name="{{ $x->name }}"
-                                                       data-coursedescription="{{ $x->coursedescription }}"
+                                                   
+                                                       data-id="{{ $x->id }}" 
+                                                       data-name="{{ $x->name }}"
                                                        data-price="{{ $x->price }}" 
                                                        data-course_id="{{ $x->course_id }}" 
                                                        data-trainer_id="{{ $x->trainer_id }}" 
                                                        data-toggle="modal" href="#exampleModal2"
-                                                       title="تعديل"><i class="las la-pen"></i></a>
+                                                       title="تعديل"><i class="las la-pen"></i>
+                                                    </a>
 
                                                     <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                                        data-id="{{ $x->id }}" data-name="{{ $x->name }}" data-toggle="modal"
-                                                       href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+                                                       href="#modaldemo9" title="حذف"><i class="las la-trash"></i>
+                                                    </a>
 
                                             </td>
                                         </tr>
@@ -110,7 +111,7 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">اسم الكورس</label>
-                                            <input type="text" class="form-control" id="name" name="name" required >
+                                            <input type="text" class="form-control" id="name" name="name" required  >
 
                                         </div>
 
@@ -161,9 +162,11 @@
                                             {{csrf_field()}}
                                             <div class="form-group">
                                                 <input type="hidden" name="id" id="id" value="">
-                                                <label for="recipient-name" class="col-form-label">اسم الكورس:</label>
-                                                <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
-                                                <input class="form-control" name="name" id="name" type="text">
+                                             
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">اسم الكورس :</label>
+                                                <input class="form-control" id="name" name="name"></input>
                                             </div>
                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">المادة</label>
                                         <select name="course_id" id="course_id" class="form-control" required>
@@ -271,16 +274,17 @@
         $('#modaldemo9').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
+            var name = button.data('name')
             var price = button.data('price')
 			var course_id = button.data('course_id')
             var trainer_id = button.data('trainer_id')
-			var name = button.data('name')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #name').val(name);
             modal.find('.modal-body #price').val(price);
 			modal.find('.modal-body #course_id').val(course_id);
             modal.find('.modal-body #trainer_id').val(trainer_id);
-			modal.find('.modal-body #name').val(name);
+	
         })
     </script>
 @endsection
