@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->integer('academicnumber')->unique();
             $table->string('firestname');
             $table->string('lastname');
+            $table->string('fullname');
             $table->date('age');
             $table->string('email')->unique();
             $table->string('password');

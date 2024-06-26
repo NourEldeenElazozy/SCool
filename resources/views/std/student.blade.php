@@ -77,6 +77,7 @@
                                         <tr>
                                             <th class="border-bottom-0">#</th>
                                             <th class="border-bottom-0">اسم الطالب</th>
+                                            <th class="border-bottom-0">اسم الاب</th>
                                             <th class="border-bottom-0">اللقب</th>
                                             <th class="border-bottom-0">تاريخ الميلاد</th>
                                             <th class="border-bottom-0">رقم الدراسي</th>
@@ -92,6 +93,7 @@
                                             <td>{{$i}}</td>
 											<td>{{$x->firestname}}</td>
 											<td>{{$x->lastname}}</td>
+                                            <td>{{$x->fullname}}</td>
 											<td>{{$x->age}}</td>
                                             <td>{{$x->academicnumber}}</td>
                                             <td>{{$x->email}}</td>
@@ -101,6 +103,7 @@
                                                        data-id="{{ $x->id }}" 
                                                        data-firestname="{{$x->firestname}}"
                                                        data-lastname="{{$x->lastname}}"
+                                                       data-fullname="{{$x->fullname}}"
                                                        data-academicnumber="{{$x->academicnumber}}" 
 													   data-age="{{$x->age}}" 
 													   data-email="{{$x->email}}" 
@@ -112,6 +115,7 @@
                                                        data-id="{{$x->id}}"
 													    data-firestname="{{$x->firestname}}"
 														  data-lastname="{{$x->lastname}}"
+                                                          data-fullname="{{$x->fullname}}"
 														 data-academicnumber="{{$x->academicnumber}}"
 														 data-toggle="modal"
                                                        href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
@@ -143,8 +147,13 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">اسم الاب</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname"  >
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="exampleFormControlTextarea1">اللقب</label>
-                                        <input class="form-control" id="lastname" name="lastname" rows="3"></input>
+                                        <input class="form-control" id="fullname" name="fullname" rows="3"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">الرقم الدراسي</label>
@@ -198,6 +207,11 @@
                                                 <input type="text" class="form-control" id="firestname" name="firestname"  >
                                            </div>
 
+                                           <div class="form-group">
+                                             <label for="exampleInputEmail1">اسم الاب</label>
+                                             <input type="text" class="form-control" id="fullname" name="fullname"  >
+                                           </div>
+
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">اللقب</label>
                                         <input class="form-control" id="lastname" name="lastname" rows="3"></input>
@@ -243,6 +257,8 @@
                                         <p>هل انت متاكد من عملية الحذف ؟</p><br>
                                         <input type="hidden" name="id" id="id" value="">
                                         <input class="form-control" name="firestname" id="firestname" type="text" readonly>
+                                        <label for="exampleFormControlTextarea1">الرقم الدراسي</label>
+                                        <input class="form-control" name="academicnumber" id="academicnumber" type="text" readonly>
 										
                                     </div>
                                     <div class="modal-footer">
@@ -293,6 +309,7 @@
             var academicnumber = button.data('academicnumber')
             var firestname = button.data('firestname')
             var lastname = button.data('lastname')
+            var fullname = button.data('fullname')
 			var age = button.data('age')
 			var email = button.data('email')
 			var password = button.data('password')
@@ -301,6 +318,7 @@
             modal.find('.modal-body #academicnumber').val(academicnumber);
             modal.find('.modal-body #firestname').val(firestname);
             modal.find('.modal-body #lastname').val(lastname);
+            modal.find('.modal-body #fullname').val(fullname);
 			modal.find('.modal-body #age').val(age);
 			modal.find('.modal-body #email').val(email);
 			modal.find('.modal-body #password').val(password);
@@ -313,11 +331,13 @@
             var id = button.data('id')
             var firestname = button.data('firestname')
 			var lastname = button.data('lastname')
+            var fullname = button.data('fullname')
 			var academicnumber = button.data('academicnumber')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
             modal.find('.modal-body #firestname').val(firestname);
 			modal.find('.modal-body #lastname').val(lastname);
+            modal.find('.modal-body #fullname').val(fullname);
 			modal.find('.modal-body #academicnumber').val(academicnumber);
         })
     </script>

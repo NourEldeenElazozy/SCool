@@ -29,6 +29,7 @@ class TrainersController extends Controller
         $validatedData = $request->validate([
             'namefirst' => 'required|alpha',
             'lastname' => 'required|alpha',
+            'fullname' => 'required|alpha',
             'phone' => 'required|numeric|unique:Trainers',
             'email' => 'required||unique:Trainers',
             'password' => 'required',
@@ -36,6 +37,7 @@ class TrainersController extends Controller
 
             'firstname.required' =>'يرجي ادخال الاسم الاول',
             'lastname.required' =>'يرجي ادخال اللقب',
+            'fullname.required' =>'يرجي ادخال اللقب',
             'phone.unique' =>'الرقم الدراسي مسجل مسبقا',
             'email.required'=> 'يرجي ادخال الايميل',
             'password.required'=> 'يرجي ادخال الرمز السري',
@@ -47,6 +49,7 @@ class TrainersController extends Controller
         Trainers::create([
                 'namefirst' => $validatedData['namefirst'],
                 'lastname' => $validatedData['lastname'],
+                'fullname' => $validatedData['fullname'],
                 'phone' => $validatedData['phone'],
                 'email' => $validatedData['email'],
                 'password' => hash('sha256', $validatedData['password']),
@@ -77,13 +80,15 @@ class TrainersController extends Controller
             
             'namefirst' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
+            'fullname' => 'required|string|max:255',
             'phone' => 'required|numeric|unique:Trainers,phone,'.$id,
             'email' => 'required|email|unique:Trainers,email,'.$id,
             'password' => 'required|string|min:8|'
         ],[
 
             'namefirst.required' =>'يرجي ادخال الاسم الاول',
-            'lastname.required' =>'يرجي ادخال اللقب',
+            'lastname.required' =>'يرجي ادخال اسم الاب',
+            'fullname.required' =>'يرجي ادخال اللقب',
             'phone.unique' =>'رقم الهاتف  مسجل مسبقا',
             'email.required'=> 'يرجي ادخال الايميل',
             'password.required'=> 'يرجي ادخال الرمز السري',
@@ -96,6 +101,7 @@ class TrainersController extends Controller
         $sections->update([
             'namefirst' => $request->namefirst,
             'lastname' => $request->lastname,
+            'fullname' => $request->fullname,
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => $request->password,

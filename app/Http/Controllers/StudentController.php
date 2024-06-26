@@ -44,6 +44,7 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'firestname' => 'required|alpha',
             'lastname' => 'required|alpha',
+            'fullname' => 'required|alpha',
             'academicnumber' => 'required|numeric|unique:students',
             'age' => 'required',
             'email' => 'required||unique:students',
@@ -51,7 +52,8 @@ class StudentController extends Controller
         ],[
 
             'firstname.required' =>'يرجي ادخال الاسم الاول',
-            'lastname.required' =>'يرجي ادخال اللقب',
+            'lastname.required' =>'يرجي ادخال اسم الاب',
+            'fullname.required' =>'يرجي ادخال اللقب',
             'academicnumber.unique' =>'الرقم الدراسي مسجل مسبقا',
             'age.required' =>'يرجي ادخال تاريخ الميلاد',
             'email.required'=> 'يرجي ادخال الايميل',
@@ -64,6 +66,7 @@ class StudentController extends Controller
             Student::create([
                 'firestname' => $validatedData['firestname'],
                 'lastname' => $validatedData['lastname'],
+                'fullname' => $validatedData['fullname'],
                 'academicnumber' => $validatedData['academicnumber'],
                 'age' => $validatedData['age'],
                 'email' => $validatedData['email'],
@@ -113,6 +116,7 @@ class StudentController extends Controller
             
             'firestname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
+            'fullname' => 'required|string|max:255',
             'academicnumber' => 'required|numeric|unique:students,Academicnumber,'.$id,
             'age' => 'required|date',
             'email' => 'required|email|unique:students,email,'.$id,
@@ -120,7 +124,8 @@ class StudentController extends Controller
         ],[
 
             'firestName.required' =>'يرجي ادخال الاسم الاول',
-            'lastname.required' =>'يرجي ادخال اللقب',
+            'lastname.required' =>'يرجي ادخال اسم الاب',
+            'fullname.required' =>'يرجي ادخال اللقب',
             'academicnumber.unique' =>'الرقم الدراسي مسجل مسبقا',
             'age.required' =>'يرجي ادخال تاريخ الميلاد',
             'email.required'=> 'يرجي ادخال الايميل',
@@ -134,6 +139,7 @@ class StudentController extends Controller
         $sections->update([
             'firestName' => $request->firestName,
             'lastname' => $request->lastname,
+            'fullname' => $request->lastname,
             'academicnumber' => $request->academicnumber,
             'age' => $request->age,
             'email' => $request->email,

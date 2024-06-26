@@ -77,7 +77,6 @@
                                         <tr>
                                             <th class="border-bottom-0">#</th>
                                             <th class="border-bottom-0">اسم المعلم</th>
-                                            <th class="border-bottom-0">اللقب</th>
                                             <th class="border-bottom-0">رقم الهاتف </th>
 											<th class="border-bottom-0">الايميل</th>
 											<th class="border-bottom-0">العمليات</th>
@@ -89,8 +88,7 @@
                                             <?php $i++?>
                                         <tr>
                                             <td>{{$i}}</td>
-											<td>{{$x->namefirst}}</td>
-											<td>{{$x->lastname}}</td>
+											<td>{{$x->namefirst.' ' .$x->lastname.' '.$x->fullname}}</td>
                                             <td>{{$x->phone}}</td>
                                             <td>{{$x->email}}</td>
                                             <td>
@@ -99,6 +97,7 @@
                                                        data-id="{{ $x->id }}" 
                                                        data-namefirst="{{$x->namefirst}}"
                                                        data-lastname="{{$x->lastname}}"
+                                                       data-fullname="{{$x->fullname}}"
                                                        data-phone="{{$x->phone}}" 
 													   data-password="{{$x->password}}" 
 													   data-email="{{$x->email}}"
@@ -109,6 +108,7 @@
                                                        data-id="{{$x->id}}"
 													    data-namefirst="{{$x->namefirst}}"
 														  data-lastname="{{$x->lastname}}"
+                                                          data-fullname="{{$x->fullname}}"
 														 data-phone="{{$x->phone}}"
 														 data-toggle="modal"
                                                        href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
@@ -140,9 +140,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">اللقب</label>
-                                        <input class="form-control" id="lastname" name="lastname" rows="3"></input>
+                                        <label for="exampleInputEmail1">اسم الاب</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname"  >
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">اللقب</label>
+                                        <input class="form-control" id="fullname" name="fullname" rows="3"></input>
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">رقم الهاتف </label>
                                         <input class="form-control" id="phone" name="phone" rows="3"></input>
@@ -190,10 +196,16 @@
                                                 <input type="text" class="form-control" id="namefirst" name="namefirst"  >
                                            </div>
 
+                                           <div class="form-group">
+                                             <label for="exampleInputEmail1">اسم الاب</label>
+                                             <input type="text" class="form-control" id="fullname" name="fullname"  >
+                                           </div>
+
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">اللقب</label>
                                         <input class="form-control" id="lastname" name="lastname" rows="3"></input>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">رقم الهاتف</label>
                                         <input class="form-control" id="phone" name="phone" rows="3"></input>
@@ -281,6 +293,7 @@
             var phone = button.data('phone')
             var namefirst = button.data('namefirst')
             var lastname = button.data('lastname')
+            var fullname = button.data('fullname')
 			var password = button.data('password')
 			var email = button.data('email')
             var modal = $(this)
@@ -288,6 +301,7 @@
             modal.find('.modal-body #phone').val(phone);
             modal.find('.modal-body #namefirst').val(namefirst);
             modal.find('.modal-body #lastname').val(lastname);
+            modal.find('.modal-body #fullname').val(fullname);
 			modal.find('.modal-body #password').val(password);
 			modal.find('.modal-body #email').val(email);
         })
@@ -299,11 +313,13 @@
             var id = button.data('id')
             var namefirst = button.data('namefirst')
 			var lastname = button.data('lastname')
+            var fullname = button.data('fullname')
 			var phone = button.data('phone')
             var modal = $(this)
             modal.find('.modal-body #id').val(id);
             modal.find('.modal-body #namefirst').val(namefirst);
 			modal.find('.modal-body #lastname').val(lastname);
+            modal.find('.modal-body #fullname').val(fullname);
 			modal.find('.modal-body #phone').val(phone);
         })
     </script>

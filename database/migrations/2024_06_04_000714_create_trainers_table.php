@@ -17,6 +17,7 @@ class CreateTrainersTable extends Migration
             $table->increments('id');
             $table->string('namefirst');
             $table->string('lastname');
+            $table->string('fullname');
             $table->string('email');
             $table->integer('phone');
             $table->string('password');

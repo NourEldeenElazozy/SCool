@@ -16,10 +16,10 @@ class CreateClassCoursesTable extends Migration
         Schema::create('class_courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('debart');
+            $table->string('coleg');
             $table->integer('trainer_id')->unsigned();
             $table->foreign('trainer_id')->references('id')->on('trainers')->onDelete('cascade');
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->integer('price');
             $table->string('created_by');
             $table->softDeletes();

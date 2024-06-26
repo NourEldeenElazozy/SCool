@@ -10,6 +10,7 @@ class Trainers extends Model
         'id',
         'namefirst',
         'lastname',
+        'fullname',
         'phone',
         'email',
         'password',
