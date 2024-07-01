@@ -28,5 +28,6 @@ Route::resource('Course', 'CoursesController');
 Route::resource('trainer', 'TrainersController');
 Route::resource('/student', 'StudentController');
 Route::resource('/ClassCourses', 'ClassCourseController');
+Route::resource('fasel', 'FaselController');
 Route::get('/{page}', 'AdminController@index');
 

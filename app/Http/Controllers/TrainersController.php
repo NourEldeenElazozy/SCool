@@ -27,9 +27,9 @@ class TrainersController extends Controller
 
         // Validate the input
         $validatedData = $request->validate([
-            'namefirst' => 'required|alpha',
-            'lastname' => 'required|alpha',
-            'fullname' => 'required|alpha',
+            'namefirst' => 'required',
+            'lastname' => 'required',
+            'fullname' => 'required',
             'phone' => 'required|numeric|unique:Trainers',
             'email' => 'required||unique:Trainers',
             'password' => 'required',

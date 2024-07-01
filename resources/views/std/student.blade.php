@@ -77,8 +77,6 @@
                                         <tr>
                                             <th class="border-bottom-0">#</th>
                                             <th class="border-bottom-0">اسم الطالب</th>
-                                            <th class="border-bottom-0">اسم الاب</th>
-                                            <th class="border-bottom-0">اللقب</th>
                                             <th class="border-bottom-0">تاريخ الميلاد</th>
                                             <th class="border-bottom-0">رقم الدراسي</th>
 											<th class="border-bottom-0">الايميل</th>
@@ -91,9 +89,7 @@
                                             <?php $i++?>
                                         <tr>
                                             <td>{{$i}}</td>
-											<td>{{$x->firestname}}</td>
-											<td>{{$x->lastname}}</td>
-                                            <td>{{$x->fullname}}</td>
+											<td>{{$x->firestname.' '.$x->lastname.' '.$x->fullname}}</td>
 											<td>{{$x->age}}</td>
                                             <td>{{$x->academicnumber}}</td>
                                             <td>{{$x->email}}</td>
@@ -209,12 +205,12 @@
 
                                            <div class="form-group">
                                              <label for="exampleInputEmail1">اسم الاب</label>
-                                             <input type="text" class="form-control" id="fullname" name="fullname"  >
+                                             <input type="text" class="form-control" id="lastname" name="lastname"  >
                                            </div>
 
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">اللقب</label>
-                                        <input class="form-control" id="lastname" name="lastname" rows="3"></input>
+                                        <input class="form-control" id="fullname" name="fullname" rows="3"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">الرقم الدراسي</label>

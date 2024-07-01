@@ -9,16 +9,13 @@ class ClassCourse extends Model
     protected $fillable = [
         'name',
         'trainer_id',
-        'course_id',
+        'debart',
+        'coleg',
         'price',
         'created_by',
     ];
     public function trainer ()
     {
         return $this->belongsTo('App\trainers');
-    }
-    public function course ()
-    {
-        return $this->belongsTo('App\courses');
     }
 }

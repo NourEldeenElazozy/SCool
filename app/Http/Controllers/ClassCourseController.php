@@ -17,11 +17,10 @@ class ClassCourseController extends Controller
      */
     public function index()
     {
-        $courses = Courses::all();
         $trainers = Trainers::all();
         $ClassCourses = ClassCourse::all();
 
-        return view('ClassCourses.ClassCourses', compact('courses', 'trainers','ClassCourses'));
+        return view('ClassCourses.ClassCourses', compact( 'trainers','ClassCourses'));
     }
 
     /**
@@ -44,8 +43,9 @@ class ClassCourseController extends Controller
     {
         ClassCourse::create([
             'name' => $request->name,
+            'debart' => $request->debart,
+            'coleg' => $request->coleg,
             'trainer_id' => $request->trainer_id,
-            'course_id' => $request->course_id,
             'price' => $request->price,
             'created_by' => (Auth::user()->name),
         ]);
@@ -86,14 +86,14 @@ class ClassCourseController extends Controller
     {
         
         $trainerid = trainers::where('id', $request->trainer_id)->first()->id;
-        $coourseid = courses::where('id', $request->course_id)->first()->id;
 
 
        $ClassCourses = ClassCourse::findOrFail($request->id);
 
        $ClassCourses->update([
        'name' => $request->name,
-       'course_id' => $coourseid,
+       'debart' => $request->debart,
+        'coleg' => $request->coleg,
        'trainer_id' => $trainerid,
        'price' => $request->price,
        
