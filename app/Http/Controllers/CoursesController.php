@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClassCourse;
 use App\Courses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ class CoursesController extends Controller
    
     public function index()
     {
-       
+        $ClassCourses = ClassCourse::all(); 
         $courses = Courses::all();
         return view('corse.Course', compact('courses'));
     }

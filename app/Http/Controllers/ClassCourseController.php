@@ -99,7 +99,7 @@ class ClassCourseController extends Controller
        
        ]);
 
-       session()->flash('Edit', 'تم تعديل المنتج بنجاح');
+       session()->flash('Edit', 'تم تعديل بنجاح');
        return back();
     }
 

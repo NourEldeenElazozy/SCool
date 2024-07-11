@@ -1,224 +1,481 @@
 @extends('layouts.master')
 @section('css')
-<!-- Internal Data table css -->
-<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+ <!-- Internal Data table css -->
+ <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
     <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
     <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/plugins/prism/prism.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
-                <div class="breadcrumb-header justify-content-between">
+				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">المواد</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ اضافة</span>
+							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+						</div>
+					</div>
+					<div class="d-flex my-xl-auto right-content">
+						<div class="pr-1 mb-3 mb-xl-0">
+							<button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+						</div>
+						<div class="pr-1 mb-3 mb-xl-0">
+							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+						</div>
+						<div class="pr-1 mb-3 mb-xl-0">
+							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+						</div>
+						<div class="mb-3 mb-xl-0">
+							<div class="btn-group dropdown">
+								<button type="button" class="btn btn-primary">14 Aug 2019</button>
+								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
+									<a class="dropdown-item" href="#">2015</a>
+									<a class="dropdown-item" href="#">2016</a>
+									<a class="dropdown-item" href="#">2017</a>
+									<a class="dropdown-item" href="#">2018</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    @if(session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if(session()->has('delete'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if(session()->has('edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
 				<!-- row -->
 				<div class="row">
-
-
-                        <div class="col-xl-12">
-                        <div class="card mg-b-20">
-                            <div class="card-header pb-0">
-                                <div class="d-flex justify-content-between">
-                                    <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">اضافة مادة</a>
-
-                                </div>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example1" class="table key-buttons text-md-nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th class="border-bottom-0">#</th>
-                                            <th class="border-bottom-0">اسم المادة</th>
-                                            <th class="border-bottom-0">الوصف</th>
-                                            <th class="border-bottom-0">السعر</th>
-                                            <th class="border-bottom-0">العمليات</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php $i =0?>
-                                        @foreach($courses as $x)
-                                            <?php $i++?>
-                                        <tr>
-                                            <td>{{$i}}</td>
-                                            <td>{{$x->coursename}}</td>
-                                            <td>{{$x->coursedescription}}</td>
-                                            <td>{{$x->courseprise }}</td>
-                                            <td>
-
-                                                    <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                                       data-id="{{ $x->id }}" data-coursename="{{ $x->coursename }}"
-                                                       data-coursedescription="{{ $x->coursedescription }}"
-                                                       data-courseprise="{{ $x->courseprise }}" 
-                                                       data-toggle="modal" href="#exampleModal2"
-                                                       title="تعديل"><i class="las la-pen"></i></a>
-
-                                                    <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                       data-id="{{ $x->id }}" data-coursename="{{ $x->coursename }}" data-toggle="modal"
-                                                       href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
-
-                                            </td>
-                                        </tr>
-                                       @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="modal" id="modaldemo8">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content modal-content-demo">
-                                <div class="modal-header">
-                                    <h6 class="modal-title">اضافة مادة</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{route('Course.store')}}" method="post">
-                                        {{csrf_field()}}
-
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">اسم المادة</label>
-                                        <input type="text" class="form-control" id="coursename" name="coursename"  >
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">الوصف</label>
-                                        <input class="form-control" id="coursedescription" name="coursedescription" rows="3"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">السعر</label>
-                                        <input class="form-control" id="courseprise" name="courseprise" rows="3"></input>
-                                    </div>
-
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success">تاكيد</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Basic modal -->
-
-
+                   
+<!DOCTYPE html>
+<html lang="en">
+    <style>body{margin-top:20px;}
+.schedule-table table thead tr {
+background: #86d4f5;
+}
+.schedule-table table thead th {
+padding: 25px 50px;
+color: #fff;
+text-align: center;
+font-size: 20px;
+font-weight: 800;
+position: relative;
+border: 0;
+}
+.schedule-table table thead th:before {
+content: "";
+width: 3px;
+height: 35px;
+background: rgba(255, 255, 255, 0.2);
+position: absolute;
+right: -1px;
+top: 50%;
+transform: translateY(-50%);
+}
+.schedule-table table thead th.last:before {
+content: none;
+}
+.schedule-table table tbody td {
+vertical-align: middle;
+border: 1px solid #e2edf8;
+font-weight: 500;
+padding: 30px;
+text-align: center;
+}
+.schedule-table table tbody td.day {
+font-size: 22px;
+font-weight: 600;
+background: #f0f1f3;
+border: 1px solid #e4e4e4;
+position: relative;
+transition: all 0.3s linear 0s;
+min-width: 165px;
+}
+.schedule-table table tbody td.active {
+position: relative;
+z-index: 10;
+transition: all 0.3s linear 0s;
+min-width: 165px;
+}
+.schedule-table table tbody td.active h4 {
+font-weight: 700;
+color: #000;
+font-size: 20px;
+margin-bottom: 5px;
+}
+.schedule-table table tbody td.active p {
+font-size: 16px;
+line-height: normal;
+margin-bottom: 0;
+}
+.schedule-table table tbody td .hover h4 {
+font-weight: 700;
+font-size: 20px;
+color: #ffffff;
+margin-bottom: 5px;
+}
+.schedule-table table tbody td .hover p {
+font-size: 16px;
+margin-bottom: 5px;
+color: #ffffff;
+line-height: normal;
+}
+.schedule-table table tbody td .hover span {
+color: #ffffff;
+font-weight: 600;
+font-size: 18px;
+}
+.schedule-table table tbody td.active::before {
+position: absolute;
+content: "";
+min-width: 100%;
+min-height: 100%;
+transform: scale(0);
+top: 0;
+left: 0;
+z-index: -1;
+border-radius: 0.25rem;
+transition: all 0.3s linear 0s;
+}
+.schedule-table table tbody td .hover {
+position: absolute;
+left: 50%;
+top: 50%;
+width: 120%;
+height: 120%;
+transform: translate(-50%, -50%) scale(0.8);
+z-index: 99;
+background: #86d4f5;
+border-radius: 0.25rem;
+padding: 25px 0;
+visibility: hidden;
+opacity: 0;
+transition: all 0.3s linear 0s;
+}
+.schedule-table table tbody td.active:hover .hover {
+transform: translate(-50%, -50%) scale(1);
+visibility: visible;
+opacity: 1;
+}
+.schedule-table table tbody td.day:hover {
+background: #86d4f5;
+color: #fff;
+border: 1px solid #86d4f5;
+}
+@media screen and (max-width: 1199px) {
+.schedule-table {
+display: block;
+width: 100%;
+overflow-x: auto;
+}
+.schedule-table table thead th {
+padding: 25px 40px;
+}
+.schedule-table table tbody td {
+padding: 20px;
+}
+.schedule-table table tbody td.active h4 {
+font-size: 18px;
+}
+.schedule-table table tbody td.active p {
+font-size: 15px;
+}
+.schedule-table table tbody td.day {
+font-size: 20px;
+}
+.schedule-table table tbody td .hover {
+padding: 15px 0;
+}
+.schedule-table table tbody td .hover span {
+font-size: 17px;
+}
+}
+@media screen and (max-width: 991px) {
+.schedule-table table thead th {
+font-size: 18px;
+padding: 20px;
+}
+.schedule-table table tbody td.day {
+font-size: 18px;
+}
+.schedule-table table tbody td.active h4 {
+font-size: 17px;
+}
+}
+@media screen and (max-width: 767px) {
+.schedule-table table thead th {
+padding: 15px;
+}
+.schedule-table table tbody td {
+padding: 15px;
+}
+.schedule-table table tbody td.active h4 {
+font-size: 16px;
+}
+.schedule-table table tbody td.active p {
+font-size: 14px;
+}
+.schedule-table table tbody td .hover {
+padding: 10px 0;
+}
+.schedule-table table tbody td.day {
+font-size: 18px;
+}
+.schedule-table table tbody td .hover span {
+font-size: 15px;
+}
+}
+@media screen and (max-width: 575px) {
+.schedule-table table tbody td.day {
+min-width: 135px;
+}
+}</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+<div class="w-95 w-md-75 w-lg-60 w-xl-55 mx-auto mb-6 text-center">
+<div class="subtitle alt-font"><span class="text-primary">#04</span><span class="title">Timetable</span></div>
+<h2 class="display-18 display-md-16 display-lg-14 mb-0">Committed to fabulous and great <span class="text-primary">#Timetable</span></h2>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="schedule-table">
+<table class="table bg-white">
+<thead>
+<tr>
+<th>Routine</th>
+<th>10 am</th>
+<th>11 am</th>
+<th>03 pm</th>
+<th>05 pm</th>
+<th class="last">07 pm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="day">Sunday</td>
+<td class="active">
+<h4>Weight Loss</h4>
+<p>10 am - 11 am</p>
+<div class="hover">
+<h4>Weight Loss</h4>
+<p>10 am - 11 am</p>
+<span>Wayne Ponce</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Yoga</h4>
+<p>03 pm - 04 pm</p>
+<div class="hover">
+<h4>Yoga</h4>
+<p>03 pm - 04 pm</p>
+<span>Francisco Watt</span>
+</div>
+</td>
+<td class="active">
+<h4>Boxing</h4>
+<p>05 pm - 06 pm</p>
+<div class="hover">
+<h4>Boxing</h4>
+<p>05 pm - 046am</p>
+<span>Charles King</span>
+</div>
+</td>
+<td></td>
+</tr>
+<tr>
+<td class="day">Monday</td>
+<td></td>
+<td class="active">
+<h4>Cycling</h4>
+<p>11 am - 12 pm</p>
+<div class="hover">
+<h4>Cycling</h4>
+<p>11 am - 12 pm</p>
+<span>Tabitha Potter</span>
+</div>
+</td>
+<td class="active">
+<h4>Karate</h4>
+<p>03 pm - 05 pm</p>
+<div class="hover">
+<h4>Karate</h4>
+<p>03 pm - 05 pm</p>
+<span>Lester Gray</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Crossfit</h4>
+<p>07 pm - 08 pm</p>
+<div class="hover">
+<h4>Crossfit</h4>
+<p>07 pm - 08 pm</p>
+<span>Candi Yip</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="day">Tuesday</td>
+<td class="active">
+<h4>Spinning</h4>
+<p>10 am - 11 am</p>
+<div class="hover">
+<h4>Spinning</h4>
+<p>10 am - 11 am</p>
+<span>Mary Cass</span>
+</div>
+</td>
+<td></td>
+<td></td>
+<td class="active">
+<h4>Bootcamp</h4>
+<p>05 pm - 06 pm</p>
+<div class="hover">
+<h4>Bootcamp</h4>
+<p>05 pm - 06 pm</p>
+<span>Brenda Mastropietro</span>
+</div>
+</td>
+<td class="active">
+<h4>Boxercise</h4>
+<p>07 pm - 08 pm</p>
+<div class="hover">
+<h4>Boxercise</h4>
+<p>07 pm - 08 pm</p>
+<span>Marlene Bruce</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="day">Wednesday</td>
+<td class="active">
+<h4>Body Building</h4>
+<p>10 am - 12 pm</p>
+<div class="hover">
+<h4>Body Building</h4>
+<p>10 am - 12 pm</p>
+<span>Brenda Hester</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Dance</h4>
+<p>03 pm - 05 pm</p>
+<div class="hover">
+<h4>Dance</h4>
+<p>03 pm - 05 pm</p>
+<span>Brian Ashworth</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Health</h4>
+<p>07 pm - 08 pm</p>
+<div class="hover">
+<h4>Health</h4>
+<p>07 pm - 08 pm</p>
+<span>Mark Croteau</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="day">Thursday</td>
+<td></td>
+<td class="active">
+<h4>Bootcamp</h4>
+<p>11 am - 12 pm</p>
+<div class="hover">
+<h4>Bootcamp</h4>
+<p>1 am - 12 pm</p>
+<span>Elisabeth Schreck</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Boday Building</h4>
+<p>05 pm - 06 pm</p>
+<div class="hover">
+<h4>Boday Building</h4>
+<p>05 pm - 06 pm</p>
+<span>Edward Garcia</span>
+</div>
+</td>
+<td></td>
+</tr>
+<tr>
+<td class="day">Friday</td>
+<td class="active">
+<h4>Racing</h4>
+<p>10 am - 11 am</p>
+<div class="hover">
+<h4>Racing</h4>
+<p>10 am - 11 am</p>
+<span>Jackie Potts</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Energy Blast</h4>
+<p>03 pm - 05 pm</p>
+<div class="hover">
+<h4>Energy Blast</h4>
+<p>03 pm - 05 pm</p>
+<span>Travis Brown</span>
+</div>
+</td>
+<td></td>
+<td class="active">
+<h4>Jumping</h4>
+<p>07 pm - 08 pm</p>
+<div class="hover">
+<h4>Jumping</h4>
+<p>07 pm - 08 pm</p>
+<span>Benjamin Barnett</span>
+</div>
+</td>
+</tr>
+<tr>
+<td class="day">Satarday</td>
+<td></td>
+<td></td>
+<td class="active">
+<h4>Aerobics</h4>
+<p>03 pm - 04 pm</p>
+<div class="hover">
+<h4>Aerobics</h4>
+<p>03 pm - 04 pm</p>
+<span>Andre Walls</span>
+</div>
+</td>
+<td class="active">
+<h4>Cycling</h4>
+<p>05 pm - 06 pm</p>
+<div class="hover">
+<h4>Cycling</h4>
+<p>05 pm - 06 pm</p>
+<span>Margaret Thomas</span>
+</div>
+</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+  
+</body>
+</html>
 				</div>
-                        <!-- edit -->
-                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">تعديل المواد</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <form action="Course/update" method="post" autocomplete="off">
-                                            {{method_field('patch')}}
-                                            {{csrf_field()}}
-                                            <div class="form-group">
-                                                <input type="hidden" name="id" id="id" value="">
-                                                <label for="recipient-name" class="col-form-label">اسم المادة:</label>
-                                                <input class="form-control" name="coursename" id="coursename" type="text">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">الوصف:</label>
-                                                <input class="form-control" id="coursedescription" name="coursedescription"></input>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">السعر:</label>
-                                                <input class="form-control" id="courseprise" name="courseprise"></input>
-                                            </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">تاكيد</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- delete -->
-                    <div class="modal" id="modaldemo9">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content modal-content-demo">
-                                <div class="modal-header">
-                                    <h6 class="modal-title">حذف المادة</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                                                                        9+6           type="button"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                                <form action="Course/destroy" method="post">
-                                    {{method_field('delete')}}
-                                    {{csrf_field()}}
-                                    <div class="modal-body">
-                                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                                        <input type="hidden" name="id" id="id" value="">
-                                        <input class="form-control" name="coursename" id="coursename" type="text" readonly>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                                    </div>
-                            </div>
-                            
-                            </form>
-                        </div>
-                    </div>
-
-
-
-
 				<!-- row closed -->
 			</div>
 			<!-- Container closed -->
@@ -226,8 +483,8 @@
 		<!-- main-content closed -->
 @endsection
 @section('js')
-    <!-- Internal Data tables -->
-    <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+ <!-- Internal Data tables -->
+ <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
@@ -245,32 +502,6 @@
     <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
     <!--Internal  Datatable js -->
     <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
-    <script src="{{URL::asset('assets/js/modal.js')}}"></script>
-
-    <script>
-        $('#exampleModal2').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var coursename = button.data('coursename')
-            var coursedescription = button.data('coursedescription')
-            var courseprise = button.data('courseprise')
-            var modal = $(this)
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #coursename').val(coursename);
-            modal.find('.modal-body #coursedescription').val(coursedescription);
-            modal.find('.modal-body #courseprise').val(courseprise);
-        })
-    </script>
-
-    <script>
-        $('#modaldemo9').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var coursename = button.data('coursename')
-            var modal = $(this)
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #coursename').val(coursename);
-        })
-    </script>
-
+    <!-- Internal Prism js-->
+    <script src="{{URL::asset('assets/plugins/prism/prism.js')}}"></script>
 @endsection

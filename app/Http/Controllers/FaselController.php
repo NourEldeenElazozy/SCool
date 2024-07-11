@@ -80,9 +80,23 @@ class FaselController extends Controller
      * param  \App\fasel  $fasel
      * return \Illuminate\Http\Response
      */
-    public function update(Request $request, fasel $fasel)
+    public function update(Request $request)
     {
-        //
+        $Student = Student::where('id', $request->student_id)->first()->id;
+        $ClassCourses = ClassCourse::where('id', $request->classcourses_id)->first()->id;
+
+
+       $fasel = fasel::findOrFail($request->id);
+
+       $fasel->update([
+       'student_id' => $request->student_id,
+        'classcourses_id' => $request->classcourses_id,
+        'price' => $request->price,
+       
+       ]);
+
+       session()->flash('Edit', 'تم تعديل بنجاح');
+       return back();
     }
 
     /**
@@ -91,8 +105,12 @@ class FaselController extends Controller
      * param  \App\fasel  $fasel
      * return \Illuminate\Http\Response
      */
-    public function destroy(fasel $fasel)
+    public function destroy(Request $request)
     {
-        //
+        
+        $id = $request->id;
+        fasel::find($id)->delete();
+        session()->flash('delete','تم حذف بنجاح');
+        return redirect('/fasel');
     }
 }
