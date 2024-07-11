@@ -47,7 +47,7 @@ class FaselController extends Controller
             'price' => $request->price,
 
         ]);
-        session()->flash('Add', 'تم اضافة المنتج بنجاح ');
+        session()->flash('Add', ' تم تسجيل الطالب');
         return redirect('/fasel');
     }
 
