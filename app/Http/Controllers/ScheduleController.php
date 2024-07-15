@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ClassCourse;
 use App\schedule;
+use App\Trainers;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -14,7 +16,11 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        $trainers = Trainers::all();
+        $ClassCourses = ClassCourse::all();
+        $schedules = schedule::all();
+
+        return view('schedules.schedules', compact( 'trainers','ClassCourses','schedules'));
     }
 
     /**
